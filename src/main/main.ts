@@ -1,11 +1,19 @@
 import { app, BrowserWindow } from 'electron'
 import path from 'path'
+import installExtension, {
+  REACT_DEVELOPER_TOOLS,
+  REDUX_DEVTOOLS,
+} from 'electron-devtools-installer';
 
 // セキュアな Electron の構成
 // 参考: https://qiita.com/pochman/items/64b34e9827866664d436
 
 const CURRENT_WORKING_DIR = process.cwd()
 
+installExtension([REDUX_DEVTOOLS, REACT_DEVELOPER_TOOLS])
+  .then((name) => console.log(name))
+  .catch((err) => console.log(err));
+  
 const createWindow = (): void => {
   // レンダープロセスとなる、ウィンドウオブジェクトを作成する。
   const win = new BrowserWindow({
@@ -46,3 +54,4 @@ app.on('activate', () => {
     createWindow()
   }
 })
+
