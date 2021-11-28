@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { App } from './pages/App'
 
 const container = document.getElementById('contents')
 
-ReactDOM.render(<p>こんにちは、世界</p>, container)
+ReactDOM.render(<App />, container)
