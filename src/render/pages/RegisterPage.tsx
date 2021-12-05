@@ -1,6 +1,9 @@
-import { Button, Link, TextField, Typography } from '@material-ui/core';
+import { Button, Link, TextField, TextFieldProps, Typography } from '@material-ui/core';
 import * as React from 'react'
+import { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { signup } from '../api/ServerApi';
 
 const Root = styled.div`
   display: flex;
@@ -44,6 +47,33 @@ const SigninButton = styled(Button)`
 `
 
 export const RegisterPage = (): JSX.Element => {
+  const userIdRef = useRef<TextFieldProps>(null)
+  const passwordRef = useRef<TextFieldProps>(null)
+
+  const navigate = useNavigate();
+
+  const [error, setError] = React.useState<string>("")
+
+  const onSigninClicked = React.useCallback(
+    () => {
+      if (!userIdRef.current?.value || !passwordRef.current?.value) {
+        setError("Incorrect username or password.")
+        return
+      }
+
+      const userId = userIdRef.current.value as string
+      const password = passwordRef.current.value as string
+
+      signup(userId, password).then((response) => {
+        navigate("/login")
+      }).catch((err) => {
+        setError("Incorrect username or password.")
+        console.error(err)
+      })
+    },
+    [],
+  )
+
   return (
     <Root>
       <MainContainer>
@@ -52,15 +82,17 @@ export const RegisterPage = (): JSX.Element => {
           <InputField
             required
             id="outlined"
-            label="Email address"
+            label="id"
+            inputRef={userIdRef}
           />
           <InputField
             required
             id="outlined-password-input"
             type="password"
             label="Password"
+            inputRef={passwordRef}
           />
-          <SigninButton>
+          <SigninButton onClick={onSigninClicked}>
             Sign up
           </SigninButton>
         </LoginContainer>

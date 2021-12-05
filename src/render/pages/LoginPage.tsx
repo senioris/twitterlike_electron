@@ -3,7 +3,7 @@ import * as React from 'react'
 import { useCallback, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { signin } from '../api/SignApi';
+import { signin } from '../api/ServerApi';
 
 const Root = styled.div`
   display: flex;
@@ -98,7 +98,10 @@ export const LoginPage = (): JSX.Element => {
         return
       }
 
-      signin("aaa", "bbb").then((response) => {
+      const userId = userIdRef.current.value as string
+      const password = passwordRef.current.value as string
+
+      signin(userId, password).then((response) => {
         navigate("/main")
       }).catch((err) => {
         setError("Incorrect username or password.")
@@ -117,7 +120,7 @@ export const LoginPage = (): JSX.Element => {
           <InputField
             required
             id="outlined"
-            label="Email address"
+            label="id"
             inputRef={userIdRef}
           />
           <InputField
