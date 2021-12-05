@@ -6,6 +6,7 @@ import * as ServerApi from '../api/ServerApi'
 import { TweetData, TweetList } from '../api/ServerApi';
 import { MenuBar } from '../components/MenuBar';
 import { TweetPostBox } from '../components/TweetPostBox';
+import { TweetRow } from '../components/TweetRow';
 
 
 const Container = styled('div')`
@@ -15,7 +16,6 @@ const Container = styled('div')`
 `
 
 const ContentContainer = styled('div')`
-  height: 100%;
 `
 
 const TweetListBox = styled('div')`
@@ -28,6 +28,7 @@ const TweetListBox = styled('div')`
   align-items: center;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 5px;
   background-color: #3b3b3b;
 `
 
@@ -62,6 +63,8 @@ export const MainPage = (): JSX.Element => {
       <ContentContainer>
         <TweetListBox>
           <TweetPostBox />
+          <TweetRow user={'aaaa'} text={'bbbb'} postDate={'cccc'} likeCount={1} isLike={true} tweetId={0} />
+          <TweetRow user={'aaaa'} text={'bbbb'} postDate={'cccc'} likeCount={1} isLike={true} tweetId={0} />
         </TweetListBox>
       </ContentContainer>
     </Container>

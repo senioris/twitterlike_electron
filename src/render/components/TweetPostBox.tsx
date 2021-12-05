@@ -1,6 +1,5 @@
 import { LoadingButton } from '@mui/lab';
 import { TextField, TextFieldProps } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 import * as React from 'react';
 import styled from 'styled-components';
 import * as ServerApi from '../api/ServerApi'
@@ -16,6 +15,12 @@ const Container = styled('div')`
 const EditBox = styled(TextField)`
   width: 100%;
 `
+
+const Footer = styled('div')`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+`
 const PostButton = styled(LoadingButton)`
   width: 80px;
 `
@@ -26,15 +31,7 @@ const Divider = styled('div')`
   width: 100%;
 `
 
-const useStyles = makeStyles({
-  postButton: {
-    marginLeft: 'auto',
-  }
-})
-
 export const TweetPostBox = (): JSX.Element => {
-  const classes = useStyles()
-
   const [isEnablePost, setEnablePost] = React.useState(false)
   const [loading, setLoading] = React.useState(false);
   
@@ -68,10 +65,12 @@ export const TweetPostBox = (): JSX.Element => {
   return (
     <React.Fragment>
       <Container>
-        <EditBox label="Post Tweet" required multiline inputRef={userPostTextRef} onChange={onPostTextChanged}/>
-        <PostButton variant="contained" className={classes.postButton} onClick={onPostClicked} disabled={!isEnablePost} loading={loading}>
-          Post
-        </PostButton>
+        <EditBox label="Post Tweet" multiline inputRef={userPostTextRef} onChange={onPostTextChanged} maxRows="20"/>
+        <Footer>
+          <PostButton variant="contained" onClick={onPostClicked} disabled={!isEnablePost} loading={loading}>
+            Post
+          </PostButton>
+        </Footer>
       </Container>
       <Divider />
     </React.Fragment>

@@ -8,6 +8,9 @@ import styled from 'styled-components';
 const Title = styled(Typography)`
   flex-grow: 1;
 `
+const Offset = styled('div')`
+  min-height: ${props => props.theme.mixins.toolbar.height + "px"};
+`
 
 export const MenuBar = (): JSX.Element => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -29,8 +32,8 @@ export const MenuBar = (): JSX.Element => {
   }, [])
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+    <React.Fragment>
+      <AppBar position="fixed" >
         <Toolbar>
           <Title variant="h6">
             Miho solen twitter like
@@ -66,6 +69,7 @@ export const MenuBar = (): JSX.Element => {
           </div>
         </Toolbar>
       </AppBar>
-    </Box>
+      <Offset />
+    </React.Fragment>
   );
 }
