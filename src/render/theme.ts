@@ -1,14 +1,14 @@
-import { blue } from '@material-ui/core/colors'
-import { createTheme, Theme } from '@material-ui/core/styles'
+import { blue } from '@mui/material/colors'
+import { createTheme, Theme } from '@mui/material/styles'
 
-declare module '@material-ui/core/styles/createPalette' {}
+declare module '@mui/material/styles/createPalette' {}
 
 const theme:Theme = createTheme({
   palette: {
     primary: {
       main: blue["500"],
     },
-    type: 'dark',
+    mode: 'dark',
   },
   typography: {
     button: {
@@ -16,27 +16,27 @@ const theme:Theme = createTheme({
       fontSize: 12,
     }
   },
-  props: {
+  components: {
     MuiTextField: {
-      variant: "outlined"
+      defaultProps: { variant: "outlined" }
     },
     MuiButton: {
-      variant: "outlined"
+      defaultProps: { variant: "outlined" }
     },
     MuiCheckbox: {
-      color: "primary"
+      defaultProps: { color: "primary" }
     },
     MuiRadio: {
-      color: "primary"
+      defaultProps: { color: "primary" }
     },
     MuiSwitch: {
-      color: "primary"
+      defaultProps: { color: "primary" }
     },
     MuiList: {
-      dense: true
+      defaultProps: { dense: true }
     },
     MuiTable: {
-      size: "small"
+      defaultProps: { size: "small" }
     },
   },
   mixins: {

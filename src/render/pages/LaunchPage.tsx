@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import { getFollowList } from '../api/ServerApi';
 
 export const LaunchPage = (): JSX.Element => {

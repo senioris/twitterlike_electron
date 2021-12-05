@@ -45,12 +45,6 @@ export const signup = async (userid: string, password: string): Promise<string> 
 
 export const logout = async (): Promise<string> => {
   const response = await axios.get("/user/logout",)
-
-  if (response.status != 200) {
-    console.log(response.status)
-    throw new Error('error')
-  }
-
   return response.data
 }
 
