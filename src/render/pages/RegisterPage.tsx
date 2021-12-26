@@ -65,7 +65,7 @@ export const RegisterPage = (): JSX.Element => {
       const password = passwordRef.current.value as string
 
       signup(userId, password).then((response) => {
-        navigate("/login")
+        navigate("/login", { replace: true })
       }).catch((err) => {
         setError("Incorrect username or password.")
         console.error(err)
@@ -91,6 +91,11 @@ export const RegisterPage = (): JSX.Element => {
             type="password"
             label="Password"
             inputRef={passwordRef}
+            onKeyPress={e => {
+              if (e.key === 'Enter') {
+                onSigninClicked()
+              }
+            }}
           />
           <SigninButton onClick={onSigninClicked}>
             Sign up

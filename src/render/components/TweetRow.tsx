@@ -60,6 +60,7 @@ export const TweetRow = (props: TweetRowProps): JSX.Element => {
 
   const onLikeClicked = React.useCallback(() => {
     setLike(!isLike)
+    ServerApi.like(props.tweetId, !isLike)
   }, [isLike])
 
   return (
@@ -68,7 +69,7 @@ export const TweetRow = (props: TweetRowProps): JSX.Element => {
         <UserName>{props.user}</UserName>
         <PostDate>{props.postDate}</PostDate>
       </Header>
-      <TweetText>{props.text}</TweetText>
+      <TweetText>{props.text.split('\n').map((line, key) => <span key={key}>{line}<br /></span>)}</TweetText>
       <Footer>
         <IconButton
           size="small"

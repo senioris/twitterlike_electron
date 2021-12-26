@@ -31,7 +31,11 @@ const Divider = styled('div')`
   width: 100%;
 `
 
-export const TweetPostBox = (): JSX.Element => {
+type TweetPostBoxProps = {
+  onPost: (() => void)
+}
+
+export const TweetPostBox = (props: TweetPostBoxProps): JSX.Element => {
   const [isEnablePost, setEnablePost] = React.useState(false)
   const [loading, setLoading] = React.useState(false);
   
@@ -54,6 +58,10 @@ export const TweetPostBox = (): JSX.Element => {
       setLoading(true)
       ServerApi.tweet(postText).then(() => {
         setLoading(false)
+        props.onPost()
+        if (userPostTextRef.current) {
+          userPostTextRef.current.value = ""
+        }
         return
       }).catch((error) => {
         setLoading(false)

@@ -28,7 +28,7 @@ export const MenuBar = (): JSX.Element => {
     setAnchorEl(null);
 
     ServerApi.logout()
-    navigate("/login")
+    navigate("/login", { replace: true })
   }, [])
 
   return (

@@ -102,7 +102,7 @@ export const LoginPage = (): JSX.Element => {
       const password = passwordRef.current.value as string
 
       signin(userId, password).then((response) => {
-        navigate("/main")
+        navigate("/main", {replace: true})
       }).catch((err) => {
         setError("Incorrect username or password.")
         console.error(err)
@@ -129,6 +129,11 @@ export const LoginPage = (): JSX.Element => {
             type="password"
             label="Password"
             inputRef={passwordRef}
+            onKeyPress={e => {
+              if (e.key === 'Enter') {
+                onSigninClicked()
+              }
+            }}
           />
           <SigninButton onClick={onSigninClicked}>
             Sign in
@@ -136,7 +141,7 @@ export const LoginPage = (): JSX.Element => {
         </LoginContainer>
         <LoginContainer>
           <div>
-            <SignUpLink to="/signup">Create new account</SignUpLink>
+            <SignUpLink to="/signup" replace>Create new account</SignUpLink>
           </div>
         </LoginContainer>
       </MainContainer>

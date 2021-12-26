@@ -5,14 +5,17 @@ axios.defaults.withCredentials = true
 
 
 export type TweetList = {
-  user_id: string
   tweet_list: TweetData[]
 }
 
 export type TweetData = {
-  user_id: string
-  tweet_id: string
-  created_at: string
+  user_id: number
+  user_name: string
+  tweet_id: number
+  tweet: string
+  like_count: number
+  is_like: number
+  date: string
 }
 
 export const signin = async (userid:string, password:string): Promise<string> => {
@@ -48,17 +51,15 @@ export const logout = async (): Promise<string> => {
   return response.data
 }
 
-export const getTweet = async (isLatest: boolean): Promise<TweetList> => {
-  let json = {}
-
-  if (!isLatest) {
-    json = {
-      isLatest: true
-    }
+export const getTweet = async (isLatest: boolean, isAll: boolean , tweetId: number): Promise<TweetList> => {
+  const json = {
+    tweet_id: tweetId,
+    isLatest: isLatest,
+    isAll: isAll
   }
 
   const response = await axios.post("/tweet/request_tweet", json)
-  return JSON.parse(response.data) as TweetList
+  return JSON.parse(JSON.stringify(response.data)) as TweetList
 }
 
 export const tweet = async (tweet: string): Promise<string> => {
@@ -75,8 +76,8 @@ export const tweet = async (tweet: string): Promise<string> => {
 }
 
 export const like = async (tweetId: number, isRegister: boolean): Promise<string> => {
-  const response = await axios.post("/like/like_update'", {
-    tweetId: tweetId,
+  const response = await axios.post("/like/like_update", {
+    tweet_id: tweetId,
     isRegister: isRegister
   })
 
